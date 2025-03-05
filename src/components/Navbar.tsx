@@ -82,9 +82,14 @@ export default function Navbar() {
             <div className="w-[1200px]">
               <ul className="mx-20 flex flex-col gap-4 text-2xl font-semibold text-white pt-10 pb-16">
                 {activeMenu.map((item, index) => (
-                  <li key={index}>
+                  <motion.li
+                    key={index}
+                    initial={{ opacity: 0, translateY: -100 }}
+                    animate={{ opacity: 100, translateY: 0 }}
+                    transition={{ duration: 0.8 }}
+                  >
                     <NavLink to={item.link}>{item.label} </NavLink>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
             </div>
