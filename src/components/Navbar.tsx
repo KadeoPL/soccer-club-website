@@ -11,7 +11,7 @@ const menuItems = [
   },
   {
     label: "Seniorzy",
-    link: "/seniorzy",
+    link: "",
     subpages: [
       { label: "Skład", link: "/seniorzy/sklad" },
       { label: "Terminarz i wyniki", link: "/seniorzy/terminarz" },
@@ -20,7 +20,7 @@ const menuItems = [
   },
   {
     label: "Szkółka piłkarska",
-    link: "/szkolka-pilkarska",
+    link: "",
     subpages: [
       { label: "Roczniki", link: "/szkolka-pilkarska/roczniki" },
       { label: "Dla rodziców", link: "/szkolka-pilkarska/dla-rodzicow" },
@@ -28,7 +28,7 @@ const menuItems = [
   },
   {
     label: "Multimedia",
-    link: "/multimedia",
+    link: "",
     subpages: [
       { label: "Galeria", link: "/multimedia/galeria" },
       { label: "Pliki do pobrania", link: "/multimedia/pliki-do-pobrania" },
@@ -107,17 +107,17 @@ export default function Navbar() {
         )}
       </nav>
       <nav className="sticky top-0 z-10 bg-white shadow-2xl block lg:hidden">
-        <div className="flex flex-row justify-between items-center h-[100px] w-full mx-auto px-2.5">
+        <div className="flex flex-row justify-between items-center h-[100px] w-full mx-auto px-6">
           <NavLink to="/">
             <img className="h-[70px]" src={logo} alt="Herb drużyny" />
           </NavLink>
           <motion.div
             className="w-[50px] h-[50px] rounded-xl bg-main flex justify-center items-center cursor-pointer"
             onClick={() => setActivePhoneMenu(!activePhoneMenu)}
-            whileTap={{ scale: 0.9 }} // efekt kliknięcia
+            whileTap={{ scale: 0.9 }}
           >
             <motion.div
-              key={activePhoneMenu ? "x-icon" : "menu-icon"} // wymusza animację przy zmianie
+              key={activePhoneMenu ? "x-icon" : "menu-icon"}
               initial={{ opacity: 0, rotate: -90 }}
               animate={{ opacity: 1, rotate: 0 }}
               exit={{ opacity: 0, rotate: 90 }}
@@ -131,6 +131,33 @@ export default function Navbar() {
             </motion.div>
           </motion.div>
         </div>
+        {activePhoneMenu && (
+          <>
+            <div className="absolute top-full left-0 w-full h-screen bg-black/50 z-0" />
+            <div className="bg-main absolute left-0 top-full w-full">
+              <ul className="flex flex-col gap-5 text-white text-lg font-medium h-full items-left py-8 px-12">
+                {menuItems.map((item, index) => (
+                  <li
+                    key={index}
+                    className="h-full flex items-center hover:cursor-pointer hover:border-b-4 duration-150 ease-in"
+                    onClick={() => setActiveMenu(item.subpages || null)}
+                  >
+                    <NavLink to={item.link}>{item.label}</NavLink>
+                    {activeMenu != null && activeMenu.length > 0 && (
+                      <ul>
+                        {activeMenu.map((item, index) => (
+                          <li key={index}>
+                            <NavLink to={item.link}>{item.label}</NavLink>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </>
+        )}
       </nav>
     </>
   );
