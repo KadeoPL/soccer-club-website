@@ -4,10 +4,12 @@
 
 @theme {
   /* --font-main: "Quicksand", sans-serif; */
-  --font-main: "Space Grotesk", sans-serif;
-  --color-main: #02733E;
+  --font-primary: "Space Grotesk", sans-serif;
+  --color-primary: #02733E;
+  --color-secondary: #012611;
+  --color-accent: #038C4C;
 }
 
 * {
-  @apply font-main;
+  @apply font-primary;
 }

@@ -55,13 +55,13 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-10 bg-white shadow-2xl hidden lg:block">
+      <nav className="sticky top-0 z-10 bg-white  shadow-2xl hidden lg:block">
         <div className="flex flex-row justify-between items-center max-w-[1260px] h-[120px] w-full mx-auto px-2.5">
           <NavLink to="/">
             <img className="h-[100px]" src={logo} alt="Herb drużyny" />
           </NavLink>
           <div className="h-full flex items-center">
-            <ul className="flex gap-10 text-lg text-main font-medium h-full items-center">
+            <ul className="flex gap-10 text-lg text-primary font-medium h-full items-center">
               {menuItems.map((item, index) => (
                 <li
                   key={index}
@@ -80,7 +80,7 @@ export default function Navbar() {
           <>
             <div className="absolute top-full left-0 w-full h-screen bg-black/50 z-0" />
             <div
-              className="absolute left-0 top-full w-full bg-main flex justify-center"
+              className="absolute left-0 top-full w-full bg-primary flex justify-center"
               onMouseEnter={() => setActiveMenu(activeMenu)}
               onMouseLeave={() => setActiveMenu(null)}
             >
@@ -117,7 +117,7 @@ export default function Navbar() {
             <img className="h-[70px]" src={logo} alt="Herb drużyny" />
           </NavLink>
           <motion.div
-            className="w-[50px] h-[50px] rounded-xl bg-main flex justify-center items-center cursor-pointer"
+            className="w-[50px] h-[50px] rounded-xl bg-primary flex justify-center items-center cursor-pointer"
             onClick={() => setActivePhoneMenu(!activePhoneMenu)}
             whileTap={{ scale: 0.9 }}
           >
@@ -146,7 +146,7 @@ export default function Navbar() {
               transition={{ duration: 0.5, ease: "easeOut" }}
             >
               <div className="absolute top-full left-0 w-full h-screen bg-black/50 z-0" />
-              <div className="bg-main absolute left-0 top-full w-full">
+              <div className="bg-primary absolute left-0 top-full w-full">
                 <motion.ul
                   className="flex flex-col gap-5 text-white text-lg font-medium h-full py-8 px-12"
                   initial={{ opacity: 0, y: -20 }}
