@@ -1,8 +1,8 @@
 import { useState } from "react";
 import logo from "../assets/gdovia_logo.png";
 import { NavLink } from "react-router";
-import { motion } from "motion/react";
-import { AlignJustify, X } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import { AlignJustify, X, ChevronDown } from "lucide-react";
 
 const menuItems = [
   {
@@ -46,7 +46,12 @@ export default function Navbar() {
     { label: string; link: string }[] | null
   >(null);
 
-  const [activePhoneMenu, setActivePhoneMenu] = useState(false);
+  const [activePhoneMenu, setActivePhoneMenu] = useState<boolean>(false);
+  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+
+  const toggleSubmenu = (label: string) => {
+    setActiveSubmenu(activeSubmenu === label ? null : label);
+  };
 
   return (
     <>
@@ -131,33 +136,58 @@ export default function Navbar() {
             </motion.div>
           </motion.div>
         </div>
-        {activePhoneMenu && (
-          <>
-            <div className="absolute top-full left-0 w-full h-screen bg-black/50 z-0" />
-            <div className="bg-main absolute left-0 top-full w-full">
-              <ul className="flex flex-col gap-5 text-white text-lg font-medium h-full items-left py-8 px-12">
-                {menuItems.map((item, index) => (
-                  <li
-                    key={index}
-                    className="h-full flex items-center hover:cursor-pointer hover:border-b-4 duration-150 ease-in"
-                    onClick={() => setActiveMenu(item.subpages || null)}
-                  >
-                    <NavLink to={item.link}>{item.label}</NavLink>
-                    {activeMenu != null && activeMenu.length > 0 && (
-                      <ul>
-                        {activeMenu.map((item, index) => (
-                          <li key={index}>
-                            <NavLink to={item.link}>{item.label}</NavLink>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </>
-        )}
+        <AnimatePresence>
+          {activePhoneMenu && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
+              <div className="absolute top-full left-0 w-full h-screen bg-black/50 z-0" />
+              <div className="bg-main absolute left-0 top-full w-full">
+                <motion.ul
+                  className="flex flex-col gap-5 text-white text-lg font-medium h-full py-8 px-12"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, ease: "easeOut", delay: 0.5 }}
+                >
+                  {menuItems.map((item, index) => (
+                    <li key={index} className="h-full">
+                      <div
+                        className="flex items-center hover:cursor-pointer hover:border-b-4 duration-150 ease-in"
+                        onClick={() => toggleSubmenu(item.label)}
+                      >
+                        <NavLink to={item.link}>{item.label}</NavLink>
+                        {item.subpages && (
+                          <motion.span
+                            animate={{
+                              rotate: activeSubmenu === item.label ? -180 : 0,
+                            }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                          >
+                            <ChevronDown size={20} />
+                          </motion.span>
+                        )}
+                      </div>
+                      {activeSubmenu === item.label && item.subpages && (
+                        <ul className="ml-4 mt-2 space-y-2">
+                          {item.subpages.map((subItem, subIndex) => (
+                            <li key={subIndex}>
+                              <NavLink to={subItem.link} className="text-sm">
+                                {subItem.label}
+                              </NavLink>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
+                </motion.ul>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
     </>
   );
