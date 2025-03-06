@@ -136,6 +136,7 @@ export default function Navbar() {
             </motion.div>
           </motion.div>
         </div>
+
         <AnimatePresence>
           {activePhoneMenu && (
             <motion.div
@@ -155,7 +156,7 @@ export default function Navbar() {
                   {menuItems.map((item, index) => (
                     <li key={index} className="h-full">
                       <div
-                        className="flex items-center hover:cursor-pointer hover:border-b-4 duration-150 ease-in"
+                        className="flex items-center"
                         onClick={() => toggleSubmenu(item.label)}
                       >
                         <NavLink to={item.link}>{item.label}</NavLink>
@@ -171,15 +172,31 @@ export default function Navbar() {
                         )}
                       </div>
                       {activeSubmenu === item.label && item.subpages && (
-                        <ul className="ml-4 mt-2 space-y-2">
+                        <motion.ul
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="ml-4 mt-2 space-y-2 overflow-hidden"
+                        >
                           {item.subpages.map((subItem, subIndex) => (
-                            <li key={subIndex}>
+                            <motion.li
+                              key={subIndex}
+                              initial={{ opacity: 0, y: -10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: -20 }}
+                              transition={{
+                                duration: 0.3,
+                                ease: "easeOut",
+                                delay: 0.05 * subIndex,
+                              }}
+                            >
                               <NavLink to={subItem.link} className="text-sm">
                                 {subItem.label}
                               </NavLink>
-                            </li>
+                            </motion.li>
                           ))}
-                        </ul>
+                        </motion.ul>
                       )}
                     </li>
                   ))}
