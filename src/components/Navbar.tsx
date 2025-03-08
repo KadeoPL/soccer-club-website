@@ -117,7 +117,7 @@ export default function Navbar() {
             <img className="h-[70px]" src={logo} alt="Herb drużyny" />
           </NavLink>
           <motion.div
-            className="w-[50px] h-[50px] rounded-xl bg-primary flex justify-center items-center cursor-pointer"
+            className=" rounded-xl flex justify-center items-center cursor-pointer"
             onClick={() => setActivePhoneMenu(!activePhoneMenu)}
             whileTap={{ scale: 0.9 }}
           >
@@ -129,9 +129,9 @@ export default function Navbar() {
               transition={{ duration: 0.3 }}
             >
               {activePhoneMenu ? (
-                <X color="#ffffff" />
+                <X color="#02733E" />
               ) : (
-                <AlignJustify color="#ffffff" />
+                <AlignJustify color="#02733E" />
               )}
             </motion.div>
           </motion.div>
