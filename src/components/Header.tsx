@@ -48,7 +48,7 @@ export default function Header() {
       : setActiveIndex(headers.length - 1);
   };
   return (
-    <div className="relative w-full lg:h-[800px] h-[600px] overflow-hidden bg-primary">
+    <div className="relative w-full lg:h-[800px] h-[500px] overflow-hidden bg-primary">
       <div className="absolute w-full bottom-0 z-20">
         <ProgressBar key={activeIndex} />
       </div>
