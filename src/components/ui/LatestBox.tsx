@@ -12,7 +12,7 @@ export default function LatestBox() {
           <img
             src={bgImage}
             alt=""
-            className="hover:scale-120 duration-[1000ms] ease-in-out"
+            className="w-full h-full hover:scale-125 duration-1000 ease-in-out"
           />
         </div>
         <h3 className="text-xl font-medium text-primary">
