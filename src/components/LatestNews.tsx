@@ -7,8 +7,7 @@ export default function LatestNews() {
     <div className="flex justify-center mt-10">
       <div className="w-full lg:w-[1260px]">
         <NavLink to={""}>
-          {" "}
-          <h1 className="flex items-center gap-2 text-3xl lg:text-4xl font-black text-primary px-5 mb-6">
+          <h1 className="flex items-center gap-2 text-3xl lg:text-4xl font-black text-primary px-5 mb-6 hover:text-accent transition-all duration-200">
             Ostatnie aktualności
             <span>
               <ArrowRight size={25} />
