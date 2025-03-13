@@ -55,12 +55,12 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-10 bg-white  shadow-2xl hidden lg:block">
+      <nav className="sticky top-0 z-20 bg-white shadow-2xl hidden lg:block">
         <div className="flex flex-row justify-between items-center max-w-[1260px] h-[120px] w-full mx-auto px-2.5">
           <NavLink to="/">
             <img className="h-[100px]" src={logo} alt="Herb drużyny" />
           </NavLink>
-          <div className="h-full flex items-center">
+          <div className="relative h-full flex items-center">
             <ul className="flex gap-10 text-lg text-primary font-medium h-full items-center">
               {menuItems.map((item, index) => (
                 <li
@@ -78,14 +78,14 @@ export default function Navbar() {
 
         {activeMenu != null && activeMenu.length > 0 && (
           <>
-            <div className="absolute top-full left-0 w-full h-screen bg-black/50 z-0" />
+            <div className="absolute top-full left-0 w-full h-screen bg-black/50" />
             <div
-              className="absolute left-0 top-full w-full bg-primary flex justify-center"
+              className="absolute left-0 top-full w-full bg-primary flex justify-center z-20"
               onMouseEnter={() => setActiveMenu(activeMenu)}
               onMouseLeave={() => setActiveMenu(null)}
             >
               <div className="w-[1200px]">
-                <ul className="mx-20 flex flex-col gap-6 text-2xl font-semibold text-white pt-10 pb-16">
+                <ul className="mx-20 flex flex-col gap-6 text-2xl font-semibold text-white pt-10 pb-16 z-20">
                   {activeMenu.map((item, index) => (
                     <motion.li
                       key={index}
@@ -111,7 +111,7 @@ export default function Navbar() {
           </>
         )}
       </nav>
-      <nav className="sticky top-0 z-10 bg-white shadow-2xl block lg:hidden">
+      <nav className="sticky top-0 z-20 bg-white shadow-2xl block lg:hidden">
         <div className="flex flex-row justify-between items-center h-[100px] w-full mx-auto px-6">
           <NavLink to="/">
             <img className="h-[70px]" src={logo} alt="Herb drużyny" />

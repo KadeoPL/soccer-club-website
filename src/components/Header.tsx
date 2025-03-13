@@ -49,7 +49,7 @@ export default function Header() {
   };
   return (
     <div className="relative w-full lg:h-[800px] h-[500px] overflow-hidden bg-primary">
-      <div className="absolute w-full bottom-0 z-20">
+      <div className="absolute w-full bottom-0 z-10">
         <ProgressBar key={activeIndex} />
       </div>
       <AnimatePresence mode="wait" custom={direction}>
